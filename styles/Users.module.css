@@ -1,0 +1,68 @@
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.tableHead{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+.tableRow{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+.tableRow td{
+    padding: 10px;
+}
+  
+.tableRow:nth-child(even) {
+    background-color: #dddddd;
+}
+  
+.inputSearch {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 20px 0 20px 0;
+}
+
+.tableRow .actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tableRow .actions span{
+    cursor: pointer;
+    user-select: none;
+}
+
+.tableRow .actions ul{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 1;
+    box-shadow: 2px 6px 21px -2px rgba(0,0,0,0.75);
+}
+
+.tableRow .actions ul li {
+    list-style: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+.tableRow .actions ul li:hover{
+    background-color: #dddddd;
+}

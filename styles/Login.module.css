@@ -1,0 +1,30 @@
+.login{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.login form{
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background-color: #048aff42;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login form input{
+    padding: 10px;
+    border: none
+}
+
+.login form button{
+    background-color: aliceblue;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
