@@ -1,13 +1,42 @@
 import styles from '../styles/Users.module.css';
 import { db } from '../firebaseConfig';
 import { useState, useEffect } from "react";
-import { doc, collection, getDocs, updateDoc } from "firebase/firestore";
+import { doc, collection, getDocs, where, query, updateDoc, orderBy } from "firebase/firestore";
+
+
 
 
 const Users = (props) => {
 
     const [users, setUsers] = useState([]);
     const [userAction, setUserActions] = useState(null);
+
+
+    const onInputChange = async (e) => {
+            const {value} = e.target;
+            setUserActions(null);
+
+            if(!value) return getUsers();
+
+            const q = query(
+            collection(db, "users"),
+            where("personalEmail", "==", value)
+            );
+
+            const docs = await getDocs(q);
+
+            let listUsers = [];
+
+            docs.forEach(userDoc => {
+                const user = userDoc.data();
+                listUsers.push(user)
+            });
+            setUsers(listUsers)
+
+
+        
+    }
+
     
     const showUserAction = (index) => {
 
@@ -32,7 +61,17 @@ const Users = (props) => {
     }
 
     const getUsers = async () => {
-        const querySnapshot = await getDocs(collection(db, "users"))
+
+        // const q = query(collection(db, "users"), orderBy("timestamp", "desc"));
+
+        const usersCollection = collection(db, "users");
+
+        const querySnapshot = await getDocs(query(usersCollection, orderBy('createdAt', 'desc')));
+
+
+
+
+        // const querySnapshot = await getDocs(q)
 
         let listUsers = [];
 
@@ -50,7 +89,7 @@ const Users = (props) => {
 
     return (
         <div className={styles.users}>
-            {/* <input className={styles.inputSearch} type="search" placeholder="Search"/> */}
+            <input className={styles.inputSearch} onChange={onInputChange} type="search" placeholder="Search by personal Email"/>
             {
                 users.length > 0 && (
                 <table className={styles.table}>
@@ -93,6 +132,10 @@ const Users = (props) => {
                     
                 </table> 
                 )
+            }
+
+            {
+                !users.length && <span>No results</span>
             }
         </div>
     )
